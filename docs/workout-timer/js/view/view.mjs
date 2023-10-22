@@ -5,7 +5,7 @@ const colors = {
   back: "wihte"
 }
 
-const layouts = {};
+export const layouts = {};
 layouts.diameter = 320;
 layouts.center = { x: layouts.diameter / 2, y: layouts.diameter / 2 };
 layouts.strokeWeight = 1;
