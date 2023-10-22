@@ -23,7 +23,7 @@ export class Sound {
       this.#pi.play();
     }
     if (c.value == 0) {
-      this.#pi.play();
+      this.#pu.play();
     }
 
   }
