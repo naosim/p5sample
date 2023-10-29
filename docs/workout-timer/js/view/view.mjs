@@ -38,20 +38,24 @@ export function drawTimer(workoutTimer) {
   strokeWeight(layouts.strokeWeight);
   circle(layouts.center.x, layouts.center.y, layouts.diameter / 1.5);
 
+  // タイマーの秒数
   fill(colors.line);
   noStroke();
   textSize(layouts.textSize);
   text(timer.value, layouts.center.x, layouts.center.y);
 
+  // セットカウント
   textSize(layouts.setCountTextSize);
   text(workoutTimer.setCount, layouts.center.x, layouts.center.y - layouts.diameter / 4 );
 
+  // 経過時刻の影
   fill(colors.back);
   text(workoutTimer.pastTimeLabel, layouts.center.x, layouts.diameter * 1.1 + 4 );
   text(workoutTimer.pastTimeLabel, layouts.center.x + 4, layouts.diameter * 1.1 );
   text(workoutTimer.pastTimeLabel, layouts.center.x, layouts.diameter * 1.1 + 4 );
   text(workoutTimer.pastTimeLabel, layouts.center.x + 3, layouts.diameter * 1.1 + 3 );
 
+  // 経過時刻
   fill(colors.line);
   text(workoutTimer.pastTimeLabel, layouts.center.x, layouts.diameter * 1.1 );
 }

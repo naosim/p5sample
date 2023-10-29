@@ -28,6 +28,9 @@ export class WorkoutTimer {
     return this.#timer;
   }
 
+  /**
+   * セットカウント。インターバルの回数。セッターじゃない。
+   */
   get setCount() {
     return this.#secCount;
   }
@@ -49,7 +52,7 @@ export class WorkoutTimer {
   }
 
   /**
-   * 3,2,1,0 のタイミングでイベント発火
+   * 3,2,1,0 のタイミングでイベントを発火する
    * @param { (c:CountDownTimer)=>void } cb
    */
   setEventListener(cb) {
@@ -62,6 +65,10 @@ export class WorkoutTimer {
     this.#startTime = this.#dateFactory();
   }
 
+  /**
+   * 経過時間のテキスト。hh:mm:ss
+   * @returns {string}
+   */
   get pastTimeLabel() {
     if(this.#startTime < 0) {
       return "00:00:00";
@@ -80,6 +87,9 @@ export class WorkoutTimer {
   }
 }
 
+/**
+ * 状態。next()を呼ぶたびにresetとworkoutを行き来します。
+ */
 export class State {
   /** @type {"reset" | "workout"} */
   #value;
