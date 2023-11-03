@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true,
-    "target":"ES6",
+    "target":"ES2022",
     "types": ["p5/global", "p5play/p5play"],
     
     "noEmit": true
