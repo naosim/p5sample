@@ -6,7 +6,7 @@ window.setup = () => {
   new Canvas(500, 500);
   window.world.gravity.y = 10;
   for(let i = 0; i < 5; i++) {
-    new Bar(i % 2 == 0 ? canvas.width / 2 + 50 : canvas.width / 2 - 50, canvas.h * (i + 1) / 6, i);
+    new Bar(i % 2 == 0 ? 300 : 200, canvas.h * (i + 1) / 6, i);
   }
   const ball = new Ball();
   new Basket();
