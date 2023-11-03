@@ -8,9 +8,9 @@ window.setup = () => {
   for(let i = 0; i < 5; i++) {
     new Bar(i % 2 == 0 ? 250 : 150, canvas.h * (i + 1) / 6, i);
   }
-  new Ball();
+  const ball = new Ball();
   new Basket();
-
+  new DeadLine(ball);
   window.draw = () => {
     clear(0, 0, 0, 1);
   }
@@ -105,6 +105,12 @@ class Ball extends SpriteWrapper {
     // this.#type = type;
     // this.sprite.diameter = Ball.calcDiameter(this.#type);
   }
+  resetPosition() {
+    this.sprite.x = canvas.w * 3 / 4
+    this.sprite.y = 0;
+    this.sprite.vel.x = 0;
+    this.sprite.vel.y = 0;
+  }
 }
 
 class Basket extends SpriteWrapper {
@@ -150,7 +156,17 @@ class Basket extends SpriteWrapper {
     this.bottom.x += x;
     this.right.x += x;
     this.left.x += x;
-  }
+  }  
+}
 
-  
+class DeadLine extends SpriteWrapper {
+  constructor(/** @type {Ball} */ball) {
+    const sprite = new Sprite(canvas.width / 2, canvas.height + 20, canvas.width * 2, 10, 'static');
+    sprite.update = () => {
+      if(this.colliding(ball)) {
+        ball.resetPosition();
+      }
+    }
+    super(sprite);
+  }
 }
