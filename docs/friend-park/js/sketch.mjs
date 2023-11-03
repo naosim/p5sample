@@ -61,14 +61,13 @@ class Bar extends SpriteWrapper {
     sprite.collider = "static";
     super(sprite)
 
-
+    const rotationSpeed = 0.5;
     sprite.update = () => {
       if(Bar.isRightPressing() && sprite.rotation < maxRotation) {
-        sprite.rotation++;
-        console.log(sprite.rotation);
+        sprite.rotation += rotationSpeed;
       }
       if(Bar.isLeftPressing() && sprite.rotation > -maxRotation) {
-        sprite.rotation--;
+        sprite.rotation -= rotationSpeed;
       }
     }
 
