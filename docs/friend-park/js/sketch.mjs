@@ -11,14 +11,10 @@ window.setup = () => {
   new Ball();
   new Basket();
 
-  
-
   window.draw = () => {
     clear(0, 0, 0, 1);
-    
   }
 }
-
 
 class Bar extends SpriteWrapper {
   constructor(x, y, num) {
@@ -67,14 +63,24 @@ class Bar extends SpriteWrapper {
 
 
     sprite.update = () => {
-      if(keyIsDown(RIGHT_ARROW) && sprite.rotation < maxRotation) {
+      if(Bar.isRightPressing() && sprite.rotation < maxRotation) {
         sprite.rotation++;
         console.log(sprite.rotation);
       }
-      if(keyIsDown(LEFT_ARROW) && sprite.rotation > -maxRotation) {
+      if(Bar.isLeftPressing() && sprite.rotation > -maxRotation) {
         sprite.rotation--;
       }
     }
+
+    
+  }
+
+  static isRightPressing() {
+    return keyIsDown(RIGHT_ARROW) || (mouse.pressing() && mouse.x > 250)
+  }
+
+  static isLeftPressing() {
+    return keyIsDown(LEFT_ARROW) || (mouse.pressing() && mouse.x < 250)
   }
 
   static createKuneArray(n, w) {
