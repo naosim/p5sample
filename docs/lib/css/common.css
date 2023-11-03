@@ -1,0 +1,13 @@
+h1, div {
+  text-align: center;
+}
+header {
+  background-color: #1e87f0;
+  font-size: 28px;
+  color: #fff;
+  font-weight: bold;
+}
+
+footer {
+  background: #fafafa;
+}
