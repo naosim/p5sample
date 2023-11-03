@@ -6,13 +6,13 @@ window.setup = () => {
   new Canvas(500, 500);
   window.world.gravity.y = 10;
   for(let i = 0; i < 5; i++) {
-    new Bar(i % 2 == 0 ? 250 : 150, canvas.h * (i + 1) / 6, i);
+    new Bar(i % 2 == 0 ? canvas.width / 2 + 50 : canvas.width / 2 - 50, canvas.h * (i + 1) / 6, i);
   }
   const ball = new Ball();
   new Basket();
   new DeadLine(ball);
   window.draw = () => {
-    clear(0, 0, 0, 1);
+    clear();
   }
 }
 
@@ -129,12 +129,12 @@ class Basket extends SpriteWrapper {
     bottom.update = () => {
       if(direction > 0) {
         this.addX(1);
-        if(this.x >= 160) {
+        if(this.x >= 250) {
           direction = -1;
         }
       } else {
         this.addX(-1);
-        if(this.x < 30) {
+        if(this.x < 50) {
           direction = 1;
         }
 
