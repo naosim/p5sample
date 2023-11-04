@@ -5,6 +5,7 @@ window.setup = () => {
   var step = 0;
   new Canvas(500, 500);
   window.world.gravity.y = 10;
+  window.world.allowSleeping = false;
   for(let i = 0; i < 5; i++) {
     new Bar(i % 2 == 0 ? 300 : 200, canvas.h * (i + 1) / 6, i);
   }
