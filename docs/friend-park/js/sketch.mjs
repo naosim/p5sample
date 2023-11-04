@@ -9,7 +9,7 @@ window.setup = () => {
     new Bar(i % 2 == 0 ? 300 : 200, canvas.h * (i + 1) / 6, i);
   }
   const ball = new Ball();
-  new Basket();
+  new Basket(ball);
   new DeadLine(ball);
   window.draw = () => {
     clear();
@@ -112,49 +112,41 @@ class Ball extends SpriteWrapper {
   }
 }
 
-class Basket extends SpriteWrapper {
-  bottom;
-  right;
-  left;
-  constructor() {
+class Basket {
+  constructor(ball) {
     const y = 490;
     const w = 10;
     const halfW = w / 2;
     const bottom = new Sprite(100, y, 60, w, 'static');
-
     const right = new Sprite(100+30-halfW, y-20, w, 40, 'static');
     const left = new Sprite(100-30+halfW, y-20, w, 40, 'static');
 
+    const group = new StaticGroup();
+    group.add(bottom)
+    group.add(right)
+    group.add(left)
+
     var direction = 1;
-    bottom.update = () => {
+    group.update = () => {
+
+      if(bottom.colliding(ball.sprite) > 100) {
+        ball.resetPosition();
+      }
+
       if(direction > 0) {
-        this.addX(1);
-        if(this.x >= 250) {
+        group.addX(1);
+        if(bottom.x >= 250) {
           direction = -1;
         }
       } else {
-        this.addX(-1);
-        if(this.x < 50) {
+        group.addX(-1);
+        if(bottom.x < 50) {
           direction = 1;
         }
 
       }
     }
-    super(bottom);
 
-    this.bottom = bottom;
-    this.right = right;
-    this.left = left;
-  }
-
-  get x() {
-    return this.sprite.x;
-  }
-
-  addX(x) {
-    this.bottom.x += x;
-    this.right.x += x;
-    this.left.x += x;
   }  
 }
 
@@ -168,4 +160,42 @@ class DeadLine extends SpriteWrapper {
     }
     super(sprite);
   }
+}
+
+class StaticGroup {
+  #sprites = [];
+
+  /** @type {Function} */
+  #update;
+
+
+  constructor() {
+  }
+
+  add(sprite) {
+    if(this.#update && this.#sprites.length == 0) {
+      sprite.update = this.#update;
+    }
+    sprite.collider = 'static';
+    this.#sprites.push(sprite);
+    
+  }
+
+  addX(x) {
+    this.#sprites.forEach(v => {
+      v.x += x;
+    })
+  }
+  addY(y) {
+    this.#sprites.forEach(v => {
+      v.y += y;
+    })
+  }
+  set update(func) {
+    this.#update = func;
+    if(this.#sprites.length > 0) {
+      this.#sprites[0].update = this.#update;
+    }
+  }
+  
 }
