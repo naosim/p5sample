@@ -1,0 +1,17 @@
+{
+  "name": "p5sample",
+  "version": "1.0.0",
+  "description": "JavaScript  \r tsconfig.jsonを使っていますがTypeScriptは使っていません。  \r 開発時にIDEにjsの型チェックをしてもらうためにtsconfigを設定しています。",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/p5": "^1.7.3"
+  }
+}
